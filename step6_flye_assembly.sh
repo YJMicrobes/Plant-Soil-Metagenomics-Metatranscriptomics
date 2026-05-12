@@ -7,12 +7,12 @@ mkdir -p 6_flye_output
 
 #Pre-work: 1
 # Check the total size of the clean reads
-du -sh 4_nanofilt
+du -sh 5_nanofilt
 #229G
 
 #Since the size is manageble in my system, I decidede to assemle them together
 #So merge all the reads
-cat 4_nanofilt/filt*.fastq > 4_nanofilt/all_merged.fastq
+cat 5_nanofilt/filt*.fastq > 5_nanofilt/all_merged.fastq
 
 #Pre-work: 2
 #Check if you have high memory space to run
@@ -38,7 +38,7 @@ module load flye/2.9.5
 
 
 flye \
-  --nano-raw 4_nanofilt/all_merged.fastq \
+  --nano-raw 5_nanofilt/all_merged.fastq \
   --meta \
   --out-dir 6_flye_output \
   -t 48
