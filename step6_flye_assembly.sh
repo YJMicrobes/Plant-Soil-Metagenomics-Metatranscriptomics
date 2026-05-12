@@ -1,16 +1,26 @@
 ##############################################################################
-## 7. contigs assembly - flye: merge all
+## 6. contigs assembly - flye: merge all
 ##############################################################################
 
+cd scratch/corn20260512/
+mkdir -p 6_flye_output
 
-#Flye assembly
-du -sh 8_nanofilt
+#Pre-work: 1
+# Check the total size of the clean reads
+du -sh 4_nanofilt
 #229G
 
-cat 8_nanofilt/filt*.fastq > 8_nanofilt/all_merged.fastq
+#Since the size is manageble in my system, I decidede to assemle them together
+#So merge all the reads
+cat 4_nanofilt/filt*.fastq > 4_nanofilt/all_merged.fastq
 
-cd 8_nanofilt
-gzip *.fastq
+#Pre-work: 2
+#Check if you have high memory space to run
+#I do
+
+#Pre-work: 3
+#Check module flye version
+module avail flye
 
 
 #!/bin/bash
@@ -25,16 +35,15 @@ gzip *.fastq
 
 module load flye/2.9.5
 
-mkdir -p flye_all
+
 
 flye \
-  --nano-raw 8_nanofilt/all_merged.fastq \
+  --nano-raw 4_nanofilt/all_merged.fastq \
   --meta \
-  --out-dir flye_all \
+  --out-dir 6_flye_output \
   -t 48
 
-
-
+#output:
 #Total length:   8753476023
 #Fragments:      331455
 #Fragments N50:  39008
